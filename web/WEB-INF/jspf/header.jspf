@@ -1,0 +1,60 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Online Library</title>
+        <link href="../css/style_main.css" rel="stylesheet" type="text/css"> 
+    </head>
+    
+    <body>
+        <%
+            request.setCharacterEncoding("UTF-8");
+            String searchString = "";
+            
+            if(request.getParameter("search_string") != null){
+                session.setAttribute("letter", '0');
+                searchString = request.getParameter("search_string");
+                session.setAttribute("search_string", searchString);
+            } else if(session.getAttribute("search_string") != null){
+                session.setAttribute("letter", '0');
+                searchString = session.getAttribute("search_string").toString();
+            } else {
+                session.setAttribute("search_string", searchString);
+            }
+            
+            
+            if(request.getParameter("username") != null){
+                session.setAttribute("username", request.getParameter("username"));
+            }
+        %>
+        <div class="container">
+            
+            <div class="header">
+                
+                <div class="logo">
+                    <a href="main.jsp"><img src="../images/library.png" name="logo" alt="Place for logo"/></a>
+                </div>
+                
+                <div class="descr">
+                    <h3>Online Library <br/>Read and think!</h3>
+                </div>
+                <div class="welcome">
+                    <h5>Welcome, <%=session.getAttribute("username") %> !</h5>
+                    
+                    <h6><a href="../index.jsp">Exit</a><h6>
+                </div>
+                    
+                <div class="search_form">
+                    <form name="search_form" method="GET" action="books.jsp">
+
+                        <input type="text" name="search_string" size="100" value="<%= searchString%>" />
+                        <input class="search_button" type="submit" value="Search"/>
+
+                        <select name="search_option">
+                            <option>book title</option>
+                            <option>author name</option>
+                        </select>
+                    </form>
+                </div>
+            </div>

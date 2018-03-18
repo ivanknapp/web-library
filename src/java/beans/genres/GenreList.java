@@ -42,7 +42,7 @@ public class GenreList {
         } catch (SQLException ex) {
             System.out.println("Ошибка при получении списка жанров");
         }
-        System.out.println("size = " + genreList.size());
+        System.out.println("GenreList size = " + genreList.size());
         return genreList;
     }
    

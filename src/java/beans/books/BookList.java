@@ -88,7 +88,7 @@ public class BookList {
         }else{
             //mysql function SUBSTRING('name', 1, 1) = n
             //SUBSTRING('example', 1, 2) = ex
-            System.err.println(letter);
+            System.err.println("getBookbyLetter = " + letter);
             return getBooks("SELECT b.id, b.name, b.isbn, b.page_count, b.publish_year, p.name AS publisher, a.fio AS author, g.name AS genre, b.image " +
                             "FROM book b " +
                             "INNER JOIN author a ON b.author_id=a.id " +

@@ -5,9 +5,16 @@
  */
 package beans.books;
 
+import db.DataBase;
 import java.awt.Image;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -67,7 +74,7 @@ public class Book implements Serializable{
         this.name = name;
     }
 
-    public byte[] getContent() {
+    public byte[] getContent() {       
         return content;
     }
 
@@ -123,6 +130,24 @@ public class Book implements Serializable{
         this.publishDate = publishDate;
     }
     
-    
+    public void fillPdfContent(){
+        String sql = "SELECT content FROM book "
+                    + "WHERE id=" + getId();
+        Connection connection = DataBase.getInstance().getConnection();
+        try(
+            
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+        ){
+            while (rs.next()){
+                this.setContent(rs.getBytes("content"));
+            }
+            System.out.println("Content length = " + this.content.length);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("Ошибка при получении контента");
+        }
+        
+    }
     
 }

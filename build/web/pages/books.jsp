@@ -55,10 +55,10 @@
         %>
         <div class="book_info">
             <div class="book_title">
-                <%=book.getName() %>
+                <p> <a href="<%=request.getContextPath()%>/PdfContent?index=<%=list.indexOf(book)%>"><%=book.getName() %></a></p>
             </div>
             <div class="book_image">
-                <a href="#">
+                <a href="<%=request.getContextPath()%>/PdfContent?index=<%=list.indexOf(book)%>">
                     <img src="<%=request.getContextPath()%>/Image?index=<%=list.indexOf(book) %>" height="250" width="190" alt="Обложка"/>
                 </a>
             </div>
@@ -68,7 +68,7 @@
                 <br><strong>Page count: </strong><%=book.getPageCount() %>
                 <br><strong>Year:</strong><%=book.getPublishDate() %>
                 <br><strong>Author:</strong><%=book.getAuthor() %>
-                <p style="margin:10px;"> <a href="#">Читать</a></p>
+                <p style="margin:10px;"> <a href="<%=request.getContextPath()%>/PdfContent?index=<%=list.indexOf(book)%>">Читать</a></p>
             </div>
         </div>
                 
